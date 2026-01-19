@@ -6,14 +6,25 @@ Multi-agent AI development templates for [opencode](https://github.com/sst/openc
 
 A ready-to-use template for setting up **multi-agent AI development workflows** with opencode. Instead of a single AI assistant doing everything, work is delegated to specialized agents—each optimized for their role.
 
-## The Four Agents
+## The Agents
+
+### Core Agents
 
 | Agent | Role | Key Trait |
 |-------|------|-----------|
 | **Oscar** | Orchestrator | Coordinates, delegates, synthesizes—never does the work himself |
 | **Scout** | Researcher + Planner | Digs deep into codebases, creates actionable implementation plans |
 | **Ivan** | Implementor | Writes code, runs tests, follows specs precisely |
-| **Jester** | Truth-Teller | Challenges assumptions, finds blind spots (called for risky changes) |
+| **Jester** | Truth-Teller (default) | Challenges assumptions, finds blind spots (called for risky changes) |
+
+### Jester Variants
+
+| Agent | Model | Use Case |
+|-------|-------|----------|
+| **jester** | Claude Opus | Default truth-teller |
+| **jester_opus** | Claude Opus | Explicit Opus variant |
+| **jester_codex** | Qwen3 Coder | Code-focused analysis |
+| **jester_qwen** | Grok | Alternative perspective |
 
 ### The Orchestrator Pattern
 
@@ -38,7 +49,37 @@ User Request
 - **Quality gates** — Jester provides adversarial review for risky changes
 - **Parallel execution** — Independent tasks can run simultaneously
 
-## Quick Start
+## Jester Consensus Pattern
+
+For high-stakes decisions, run all three Jester variants in parallel and synthesize their feedback:
+
+```
+Oscar
+  │
+  ├──→ @jester_opus ──┐
+  ├──→ @jester_codex ─┼──→ Synthesize → Decision
+  └──→ @jester_qwen ──┘
+```
+
+**When to use Jester Consensus:**
+
+- **Major architectural decisions** — Changing core abstractions, adding new patterns
+- **Risky refactors** — Changes touching >5 files or critical paths
+- **Diverse perspectives needed** — When you want multiple AI viewpoints on a problem
+- **Breaking ties** — When the team is stuck or going in circles
+
+**How it works:**
+
+1. Oscar dispatches the same question to all three Jesters in parallel
+2. Each Jester analyzes independently using their underlying model
+3. Oscar synthesizes the responses, looking for:
+   - **Agreement** — All three flag the same issue = high confidence
+   - **Disagreement** — Different concerns = explore each angle
+   - **Unique insights** — One Jester sees something others miss = investigate
+
+Most of what any single Jester says is noise, but consensus across models is signal.
+
+## Installation
 
 ### 1. Install opencode
 
@@ -48,28 +89,39 @@ curl -fsSL https://opencode.ai/install | bash
 
 Or see [opencode installation docs](https://github.com/sst/opencode#installation).
 
-### 2. Copy to your project
+### 2. Run the installer
 
 ```bash
 # Clone this repo
 git clone https://github.com/yourusername/opencode-agents.git
+cd opencode-agents
 
-# Copy agent definitions to your project
-cp -r opencode-agents/.opencode/agent/ /path/to/your/project/.opencode/agent/
-
-# Copy and customize the template AGENTS.md
-cp opencode-agents/AGENTS.md /path/to/your/project/
+# Run the installer script
+./install.sh
 ```
 
-### 3. Customize AGENTS.md
+The installer copies agent definitions to `~/.config/opencode/agent/`.
 
-Edit `AGENTS.md` in your project to add:
-- Project overview and goals
-- Setup instructions
-- Project structure
-- Architecture documentation
+### 3. Configure opencode
 
-### 4. Start using agents
+```bash
+# Copy the example configuration
+cp opencode.json.example ~/.config/opencode/opencode.json
+
+# Edit to customize models (optional)
+nano ~/.config/opencode/opencode.json
+```
+
+### 4. Copy AGENTS.md to your project
+
+```bash
+# Copy and customize the template AGENTS.md
+cp AGENTS.md /path/to/your/project/
+```
+
+Edit `AGENTS.md` in your project to add project-specific context.
+
+### 5. Start using agents
 
 ```bash
 # In your project directory
@@ -82,23 +134,57 @@ Then talk to Oscar:
 @oscar: I need to add user authentication to the app
 ```
 
-Oscar will:
-1. Dispatch Scout to research the codebase and create a plan
-2. Review the plan with you
-3. Dispatch Ivan to implement
-4. (Optionally) Consult Jester for complex/risky changes
+## Configuration
+
+The `opencode.json.example` file contains the full agent configuration:
+
+```json
+{
+  "model": "zen/claude-opus-4-5",
+  "default_agent": "oscar",
+  "agent": {
+    "oscar": { ... },
+    "scout": { ... },
+    "ivan": { ... },
+    "jester": { "model": "zen/claude-opus-4-5", ... },
+    "jester_opus": { "model": "zen/claude-opus-4-5", ... },
+    "jester_codex": { "model": "zen/qwen3-coder-480b", ... },
+    "jester_qwen": { "model": "zen/grok-3", ... }
+  }
+}
+```
+
+### Customizing Models
+
+Edit `~/.config/opencode/opencode.json` to:
+
+- **Change the default model** — Update the top-level `"model"` field
+- **Use different Jester models** — Swap model providers for each variant
+- **Add new variants** — Create additional Jester entries with different models
+
+### Why Multiple Jesters?
+
+Different AI models have different strengths and blind spots:
+
+- **Claude Opus** — Strong reasoning, good at finding logical flaws
+- **Qwen3 Coder** — Code-focused, catches implementation issues
+- **Grok** — Alternative perspective, different training data
+
+Running all three in parallel for critical decisions gives you diverse viewpoints.
 
 ## File Structure
 
 ```
-your-project/
-├── .opencode/
-│   └── agent/
-│       ├── oscar.md   # Orchestrator
-│       ├── scout.md   # Researcher + Planner
-│       ├── ivan.md    # Implementor
-│       └── jester.md  # Truth-Teller
-└── AGENTS.md          # Project-specific context (customize this)
+opencode-agents/
+├── .opencode/agent/
+│   ├── oscar.md          # Orchestrator
+│   ├── scout.md          # Researcher + Planner
+│   ├── ivan.md           # Implementor
+│   └── jester.md         # Truth-Teller
+├── AGENTS.md             # Template for project-specific context
+├── README.md             # This file
+├── install.sh            # Installer script
+└── opencode.json.example # Example configuration
 ```
 
 ## Key Principles

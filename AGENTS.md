@@ -13,14 +13,26 @@ This project uses a multi-agent system for context-efficient development.
 
 ### Agents
 
+#### Core Agents
+
 | Agent | Role | Mode |
 |-------|------|------|
 | **@oscar** | Orchestrator - coordinates, delegates, synthesizes | primary |
 | **@scout** | Researcher + Planner - deep analysis, actionable plans | subagent |
 | **@ivan** | Implementor - writes code, runs tests | subagent |
-| **@jester** | Truth-Teller - challenges assumptions (on-demand) | subagent |
+| **@jester** | Truth-Teller (default) - challenges assumptions | subagent |
+
+#### Jester Variants
+
+| Agent | Model | Purpose |
+|-------|-------|---------|
+| **@jester** | Claude Opus | Default truth-teller |
+| **@jester_opus** | Claude Opus | Explicit Opus variant |
+| **@jester_codex** | Qwen3 Coder | Code-focused analysis |
+| **@jester_qwen** | Grok | Alternative perspective |
 
 ### Workflow
+
 ```
 User Request
     │
@@ -35,7 +47,31 @@ User Request
     └──→ Ivan (implement) ──→ Done ◄─┘
 ```
 
+### Jester Consensus Pattern
+
+For high-stakes decisions, run all three Jester variants in parallel:
+
+```
+Oscar
+  │
+  ├──→ @jester_opus ──┐
+  ├──→ @jester_codex ─┼──→ Synthesize → Decision
+  └──→ @jester_qwen ──┘
+```
+
+**When to use:**
+- Major architectural decisions
+- Risky refactors (>5 files)
+- When you want diverse AI perspectives
+- When the team is stuck
+
+**How to interpret:**
+- **All agree** = High confidence signal
+- **Disagree** = Explore each angle
+- **One unique insight** = Investigate further
+
 ### Key Principles
+
 - **Oscar delegates everything** - preserves context
 - **Scout digs deep, plans lean** - research flows into actionable plans
 - **Ivan follows specs** - no improvisation

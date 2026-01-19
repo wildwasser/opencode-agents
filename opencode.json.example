@@ -1,0 +1,52 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "zen/claude-opus-4-5",
+  "default_agent": "oscar",
+  "keybinds": {
+    "f9": "agent:prev",
+    "f10": "agent:next"
+  },
+  "agent": {
+    "oscar": {
+      "description": "Orchestrator - coordinates, delegates, synthesizes",
+      "mode": "primary",
+      "prompt": "{file:~/.config/opencode/agent/oscar.md}"
+    },
+    "scout": {
+      "description": "Researcher + Planner - deep analysis, actionable plans",
+      "mode": "subagent",
+      "prompt": "{file:~/.config/opencode/agent/scout.md}"
+    },
+    "ivan": {
+      "description": "Implementor - writes code, runs tests, git operations",
+      "mode": "subagent", 
+      "prompt": "{file:~/.config/opencode/agent/ivan.md}"
+    },
+    "jester": {
+      "description": "Truth-Teller (default) - challenges assumptions",
+      "mode": "subagent",
+      "model": "zen/claude-opus-4-5",
+      "prompt": "{file:~/.config/opencode/agent/jester.md}"
+    },
+    "jester_opus": {
+      "description": "Jester (Opus) - Truth-teller using Claude Opus",
+      "mode": "subagent",
+      "model": "zen/claude-opus-4-5",
+      "prompt": "{file:~/.config/opencode/agent/jester.md}"
+    },
+    "jester_codex": {
+      "description": "Jester (Qwen) - Truth-teller using Qwen3 Coder",
+      "mode": "subagent",
+      "model": "zen/qwen3-coder-480b",
+      "prompt": "{file:~/.config/opencode/agent/jester.md}"
+    },
+    "jester_qwen": {
+      "description": "Jester (Grok) - Truth-teller using Grok",
+      "mode": "subagent",
+      "model": "zen/grok-3",
+      "prompt": "{file:~/.config/opencode/agent/jester.md}"
+    },
+    "plan": { "disable": true },
+    "build": { "disable": true }
+  }
+}
