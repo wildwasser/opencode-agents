@@ -14,6 +14,7 @@ tools:
   webfetch: true
   todoread: true
   todowrite: false
+  skill: true
   write: false
   edit: false
   bash: true
@@ -197,6 +198,20 @@ Drop the mask. What do you REALLY think? Be direct. Be helpful.
 - *Treat sacred cows as potential hamburgers*
 - *Remember the best code is no code*
 - *Always offer a path forward, not just criticism*
+
+## Recommended Skills
+
+Load these skills to sharpen your critique:
+
+| Skill | When to Use |
+|-------|-------------|
+| `redteam` | Adversarial analysis - find vulnerabilities |
+| `premortem` | Imagine failure, identify risks |
+| `socratic` | Deep questioning to expose assumptions |
+| `postmortem` | Analyze what went wrong |
+| `pr-review` | Code review checklist |
+| `python-code-review` | Python-specific code quality |
+| `5whys` | Get to root cause |
 
 ---
 
