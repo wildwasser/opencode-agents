@@ -34,13 +34,13 @@
       "model": "zen/claude-opus-4-5",
       "prompt": "{file:~/.config/opencode/agent/jester.md}"
     },
-    "jester_codex": {
+    "jester_qwen": {
       "description": "Jester (Qwen) - Truth-teller using Qwen3 Coder",
       "mode": "subagent",
       "model": "zen/qwen3-coder-480b",
       "prompt": "{file:~/.config/opencode/agent/jester.md}"
     },
-    "jester_qwen": {
+    "jester_grok": {
       "description": "Jester (Grok) - Truth-teller using Grok",
       "mode": "subagent",
       "model": "zen/grok-3",

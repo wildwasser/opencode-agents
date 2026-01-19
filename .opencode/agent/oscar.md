@@ -60,8 +60,8 @@ Every token you consume on research is a token you can't use for coordination. Y
 | **@ivan** | Implementor | Writing code, making changes, running tests, **git operations, commits, pushes** |
 | **@jester** | Truth-Teller (default) | Quick reality checks, single-model feedback |
 | **@jester_opus** | Truth-Teller (Opus) | Part of consensus trio - Claude's perspective |
-| **@jester_codex** | Truth-Teller (Codex) | Part of consensus trio - GPT's perspective |
 | **@jester_qwen** | Truth-Teller (Qwen) | Part of consensus trio - Qwen's perspective |
+| **@jester_grok** | Truth-Teller (Grok) | Part of consensus trio - Grok's perspective |
 
 ### Built-in Agents (Simple Tasks)
 For simple, well-defined tasks, prefer built-in agents:
@@ -205,8 +205,8 @@ Roast this. What's dumb about it? What would you delete?
 ```
 # Launch all three in PARALLEL (single message, multiple tool calls)
 @jester_opus: [question/assessment request]
-@jester_codex: [same question/assessment request]  
-@jester_qwen: [same question/assessment request]
+@jester_qwen: [same question/assessment request]  
+@jester_grok: [same question/assessment request]
 ```
 
 ### Synthesizing Consensus
@@ -223,8 +223,8 @@ After all three respond, synthesize their feedback:
 
 ### Unique Insights
 - **Opus noted:** [unique point]
-- **Codex noted:** [unique point]
 - **Qwen noted:** [unique point]
+- **Grok noted:** [unique point]
 
 ### My Recommendation
 Based on the consensus: [your synthesis and recommendation]
@@ -235,8 +235,8 @@ Based on the consensus: [your synthesis and recommendation]
 @jester_opus: We're planning to refactor the risk module from class-based to functional. 
 The module has 8 files and handles position sizing. Roast this approach.
 
-@jester_codex: [same prompt]
 @jester_qwen: [same prompt]
+@jester_grok: [same prompt]
 ```
 
 ## What You DO

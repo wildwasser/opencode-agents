@@ -28,8 +28,8 @@ This project uses a multi-agent system for context-efficient development.
 |-------|-------|---------|
 | **@jester** | Claude Opus | Default truth-teller |
 | **@jester_opus** | Claude Opus | Explicit Opus variant |
-| **@jester_codex** | Qwen3 Coder | Code-focused analysis |
-| **@jester_qwen** | Grok | Alternative perspective |
+| **@jester_qwen** | Qwen3 Coder | Code-focused analysis |
+| **@jester_grok** | Grok | Alternative perspective |
 
 ### Workflow
 
@@ -55,8 +55,8 @@ For high-stakes decisions, run all three Jester variants in parallel:
 Oscar
   │
   ├──→ @jester_opus ──┐
-  ├──→ @jester_codex ─┼──→ Synthesize → Decision
-  └──→ @jester_qwen ──┘
+  ├──→ @jester_qwen ──┼──→ Synthesize → Decision
+  └──→ @jester_grok ──┘
 ```
 
 **When to use:**

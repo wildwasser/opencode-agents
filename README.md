@@ -23,8 +23,8 @@ A ready-to-use template for setting up **multi-agent AI development workflows** 
 |-------|-------|----------|
 | **jester** | Claude Opus | Default truth-teller |
 | **jester_opus** | Claude Opus | Explicit Opus variant |
-| **jester_codex** | Qwen3 Coder | Code-focused analysis |
-| **jester_qwen** | Grok | Alternative perspective |
+| **jester_qwen** | Qwen3 Coder | Code-focused analysis |
+| **jester_grok** | Grok | Alternative perspective |
 
 ### The Orchestrator Pattern
 
@@ -57,8 +57,8 @@ For high-stakes decisions, run all three Jester variants in parallel and synthes
 Oscar
   │
   ├──→ @jester_opus ──┐
-  ├──→ @jester_codex ─┼──→ Synthesize → Decision
-  └──→ @jester_qwen ──┘
+  ├──→ @jester_qwen ──┼──→ Synthesize → Decision
+  └──→ @jester_grok ──┘
 ```
 
 **When to use Jester Consensus:**
@@ -148,8 +148,8 @@ The `opencode.json.example` file contains the full agent configuration:
     "ivan": { ... },
     "jester": { "model": "zen/claude-opus-4-5", ... },
     "jester_opus": { "model": "zen/claude-opus-4-5", ... },
-    "jester_codex": { "model": "zen/qwen3-coder-480b", ... },
-    "jester_qwen": { "model": "zen/grok-3", ... }
+    "jester_qwen": { "model": "zen/qwen3-coder-480b", ... },
+    "jester_grok": { "model": "zen/grok-3", ... }
   }
 }
 ```
