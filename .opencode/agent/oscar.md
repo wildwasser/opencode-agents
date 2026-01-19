@@ -17,6 +17,8 @@ tools:
   write: false
   edit: false
   bash: true
+  question: true
+  skill: true
 permission:
   bash:
     "ls *": allow
@@ -127,6 +129,16 @@ Use custom agents (@scout, @ivan, @jester) for complex, multi-step work.
 
 Which direction would you like to go?
 ```
+
+### Using the Question Tool
+When presenting options to users, use the `question` tool for:
+- Binary choices (yes/no, proceed/cancel)
+- Multiple-choice decisions (3-5 clear options)
+- When you need a definitive answer before delegating
+
+Use text-based explanations when:
+- Options require detailed context/tradeoffs
+- User might want to propose alternatives not listed
 
 ### High-Stakes Decisions → Consult Jester First
 ```markdown

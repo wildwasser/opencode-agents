@@ -17,6 +17,7 @@ tools:
   write: false
   edit: false
   bash: true
+  skill: true
 permission:
   bash:
     # GitHub CLI

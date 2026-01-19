@@ -176,15 +176,76 @@ Running all three in parallel for critical decisions gives you diverse viewpoint
 
 ```
 opencode-agents/
-├── .opencode/agent/
-│   ├── oscar.md          # Orchestrator
-│   ├── scout.md          # Researcher + Planner
-│   ├── ivan.md           # Implementor
-│   └── jester.md         # Truth-Teller
+├── .opencode/
+│   ├── agent/
+│   │   ├── oscar.md          # Orchestrator
+│   │   ├── scout.md          # Researcher + Planner
+│   │   ├── ivan.md           # Implementor
+│   │   └── jester.md         # Truth-Teller
+│   └── skills/
+│       ├── python-code-review/   # Python code review checklist
+│       ├── python-testing/       # pytest patterns and best practices
+│       ├── python-venv/          # Virtual environment management
+│       ├── pr-review/            # Pull request review guidelines
+│       ├── git-commit/           # Commit message conventions
+│       ├── issue-triage/         # GitHub issue triage workflow
+│       ├── prompt-engineering/   # LLM prompt design patterns
+│       ├── data-pipeline/        # Data pipeline best practices
+│       ├── ml-experiment/        # ML experiment tracking
+│       └── agent-tuning/         # Agent prompt optimization
 ├── AGENTS.md             # Template for project-specific context
 ├── README.md             # This file
 ├── install.sh            # Installer script
 └── opencode.json.example # Example configuration
+```
+
+## Skills
+
+Skills are reusable knowledge modules that agents can load on-demand using the `Skill` tool. Each skill contains domain-specific expertise in a `SKILL.md` file.
+
+### Available Skills
+
+| Skill | Description |
+|-------|-------------|
+| **python-code-review** | Comprehensive Python code review checklist covering style, types, error handling, and performance |
+| **python-testing** | pytest patterns, fixtures, mocking strategies, and test organization |
+| **python-venv** | Virtual environment setup, dependency management, and common pitfalls |
+| **pr-review** | Pull request review guidelines for thorough, constructive feedback |
+| **git-commit** | Conventional commit message format and best practices |
+| **issue-triage** | GitHub issue triage workflow for prioritization and labeling |
+| **prompt-engineering** | LLM prompt design patterns, few-shot examples, and optimization techniques |
+| **data-pipeline** | Data pipeline architecture, validation, and monitoring patterns |
+| **ml-experiment** | ML experiment tracking, reproducibility, and model versioning |
+| **agent-tuning** | Agent prompt optimization and behavior refinement techniques |
+
+### How Skills Work
+
+Agents with `skill: true` in their frontmatter can load skills dynamically:
+
+```yaml
+---
+tools: [Read, Write, Glob, Grep, Bash, Task]
+skill: true
+---
+```
+
+When an agent needs specialized knowledge, they call the Skill tool:
+
+```
+Agent: I need to review this Python code thoroughly.
+[Loads skill: python-code-review]
+Agent: Now applying the checklist...
+```
+
+### Creating Custom Skills
+
+1. Create a directory under `.opencode/skills/` with your skill name
+2. Add a `SKILL.md` file with the skill content
+3. Skills are automatically available to agents with `skill: true`
+
+```bash
+mkdir -p ~/.config/opencode/skills/my-custom-skill
+echo "# My Custom Skill\n\nSkill content here..." > ~/.config/opencode/skills/my-custom-skill/SKILL.md
 ```
 
 ## Key Principles

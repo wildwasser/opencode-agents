@@ -17,6 +17,7 @@ tools:
   write: true
   edit: true
   bash: true
+  skill: true
 permission:
   bash:
     "*": allow
