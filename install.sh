@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # OpenCode Agents Installer
-# Copies agent files to ~/.config/opencode/agent/
+# Copies agent files to ~/.config/opencode/agents/
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SOURCE_DIR="$SCRIPT_DIR/.opencode/agent"
-TARGET_DIR="$HOME/.config/opencode/agent"
+SOURCE_DIR="$SCRIPT_DIR/.opencode/agents"
+TARGET_DIR="$HOME/.config/opencode/agents"
 
 echo "OpenCode Agents Installer"
 echo "========================="

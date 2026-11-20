@@ -9,7 +9,7 @@ description: Configure and optimize AI coding agents (OpenCode/Claude). Use when
 ```
 ~/.config/opencode/
 ├── opencode.json          # Main config
-├── agent/                 # Custom agent prompts
+├── agents/                 # Custom agent prompts
 │   ├── oscar.md
 │   ├── scout.md
 │   ├── ivan.md
@@ -193,7 +193,7 @@ After modifying permissions, test that:
 cat ~/.config/opencode/opencode.json
 
 # View agent prompt
-cat ~/.config/opencode/agent/<name>.md
+cat ~/.config/opencode/agents/<name>.md
 ```
 
 ### Common Issues
