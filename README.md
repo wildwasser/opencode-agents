@@ -100,7 +100,7 @@ cd opencode-agents
 ./install.sh
 ```
 
-The installer copies agent definitions to `~/.config/opencode/agent/`.
+The installer copies agent definitions to `~/.config/opencode/agents/`.
 
 ### 3. Configure opencode
 
@@ -177,7 +177,7 @@ Running all three in parallel for critical decisions gives you diverse viewpoint
 ```
 opencode-agents/
 ├── .opencode/
-│   ├── agent/
+│   ├── agents/
 │   │   ├── oscar.md          # Orchestrator
 │   │   ├── scout.md          # Researcher + Planner
 │   │   ├── ivan.md           # Implementor
